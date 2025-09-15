@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "html-css-classes-posicionamento-flexbox": {
+    "html-css-ambiente-arquivos-tags": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -53,10 +53,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "html-css-classes-posicionamento-flexbox:build:production"
+              "buildTarget": "html-css-ambiente-arquivos-tags:build:production"
             },
             "development": {
-              "buildTarget": "html-css-classes-posicionamento-flexbox:build:development"
+              "buildTarget": "html-css-ambiente-arquivos-tags:build:development"
             }
           },
           "defaultConfiguration": "development"

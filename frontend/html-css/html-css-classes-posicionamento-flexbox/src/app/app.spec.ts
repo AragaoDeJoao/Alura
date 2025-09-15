@@ -20,6 +20,6 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, html-css-classes-posicionamento-flexbox');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, html-css-ambiente-arquivos-tags');
   });
 });
