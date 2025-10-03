@@ -1,13 +1,20 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
-body{
+body {
   background-color: black;
-  color:white;
+  color: white;
+  height: 100vh; /*altura em 100% do Viewport (definido na tag HTML do arquivo Height*/
+  box-sizing: border-box;
 }
 
-.titulo-destaque{
+.titulo-destaque {
   color: #22d4fd;
+}
+
+.apresentacao{
+  display: flex;
+  align-items: center;
 }
