@@ -5,7 +5,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { Habilidade } from '../../shared/models/habilidade.interface';
-import { ChipComponent } from '../../shared/components/chip/chip.component';
 
 
 @Component({
@@ -15,7 +14,6 @@ import { ChipComponent } from '../../shared/components/chip/chip.component';
     CommonModule,
     ReactiveFormsModule,
     ButtonComponent,
-    ChipComponent
   ],
   templateUrl: './perfil-form.component.html',
   styleUrls: ['./perfil-form.component.scss']
