@@ -10,6 +10,16 @@
 
       <form [formGroup]="dadosPessoaisForm" (ngSubmit)="onProximo()">
 
+        <div class="cadastro-form__field">
+          <label for="nomeCompleto" class="cadastro-form__label">Nome Completo</label>
+          <input id="nomeCompleto" type="text" class="cadastro-form__input" formControlName="nomeCompleto">
+
+          @if (dadosPessoaisForm.get('nomeCompleto')?.invalid && dadosPessoaisForm.get('nomeCompleto')?.touched) {
+            <div></div>
+          }
+
+        </div>
+
         <div class="cadastro-form__actions">
           <app-button
             text="Anterior"
