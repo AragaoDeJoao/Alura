@@ -13,12 +13,57 @@
         <div class="cadastro-form__field">
           <label for="nomeCompleto" class="cadastro-form__label">Nome Completo</label>
           <input id="nomeCompleto" type="text" class="cadastro-form__input" formControlName="nomeCompleto">
-
           @if (dadosPessoaisForm.get('nomeCompleto')?.invalid && dadosPessoaisForm.get('nomeCompleto')?.touched) {
-            <div></div>
+            <div class="cadastro-form__error">
+              Nome Completo é Obrigatório
+            </div>
           }
+        </div>
+
+        <div class="cadastro-form__row">
+          <div class="cadastro-form__field cadastro-form__field--half">
+            <label for="estado" class="cadastro-form__label">Estado</label>
+            <select id="estado" formControlName="estado" class="cadastro-form__select">
+              <option value="" disabled selected>Selecione</option>
+              @for (estado of estados; track estado) {
+                <option [value]="estado.sigla">{{ estado.nome }}</option>
+              }
+            </select>
+            @if (dadosPessoaisForm.get('estado')?.invalid && dadosPessoaisForm.get('estado')?.touched) {
+              <div class="cadastro-form__error">
+                Estado é Obrigatório
+              </div>
+            }
+          </div>
+          <div class="cadastro-form__field cadastro-form__field--half">
+            <label for="cidade" class="cadastro-form__label">Cidade</label>
+            <input id="cidade" formControlName="cidade" type="text" class="cadastro-form__input">
+            @if (dadosPessoaisForm.get('cidade')?.invalid && dadosPessoaisForm.get('cidade')?.touched) {
+              <div class="cadastro-form__error">
+                Cidade é Obrigatório
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="cadastro-form__field">
+          <label for="email" class="cadastro-form__label">Email</label>
+          <input class="cadastro-form__input" type="text" id="email" formControlName="email">
+          @if (dadosPessoaisForm.get('email')?.invalid && dadosPessoaisForm.get('email')?.touched) {
+            <div class="cadastro-form__error">
+              Email é Obrigatório
+            </div>
+          }
+        </div>
+
+        <div class="cadastro-form__field cadastro-form__field--half">
+          <div class="cadastro-form__field">
+            <label for="senha" class="cadastro-form__label">Senha</label>
+            <input type="password" formControlName="senha" id="senha" class="cadastro-form__input">
+          </div>
 
         </div>
+
 
         <div class="cadastro-form__actions">
           <app-button
@@ -38,6 +83,7 @@
             (clicked)="onProximo()">
           </app-button>
         </div>
+
       </form>
     </div>
   </div>
