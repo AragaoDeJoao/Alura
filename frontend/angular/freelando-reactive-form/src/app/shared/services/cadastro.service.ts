@@ -17,8 +17,7 @@ interface CadastroData {
 export class CadastroService {
 
   private cadastroDataSubject = new BehaviorSubject<CadastroData>({});
-
-  cadastroData$ = this.cadastroDataSubject.asObservable();
+  private cadastroData$ = this.cadastroDataSubject.asObservable();
 
   constructor() {
     const savedData = localStorage.getItem('cadastroData');
@@ -31,9 +30,7 @@ export class CadastroService {
   updateCadastroData(data: Partial<CadastroData>){
     const currentData = this.cadastroDataSubject.value;
     const updatedData = {...currentData, ...data};
-
     this.cadastroDataSubject.next(updatedData);
-
     localStorage.setItem('cadastroData', JSON.stringify(updatedData));
   }
 
