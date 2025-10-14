@@ -1,6 +1,13 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl, AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors, ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {ButtonComponent} from '../../shared/components/button/button.component';
 import {Router} from '@angular/router';
 import {CadastroService} from '../../shared/services/cadastro.service';
@@ -14,8 +21,11 @@ import {CadastroService} from '../../shared/services/cadastro.service';
     ButtonComponent
   ],
   templateUrl: './dados-pessoais-form.component.html',
-  styleUrls: ['./dados-pessoais-form.component.scss']
+  styleUrls: ['./dados-pessoais-form.component.scss'],
 })
+
+
+
 export class DadosPessoaisFormComponent implements OnInit {
 
   dadosPessoaisForm!: FormGroup;
