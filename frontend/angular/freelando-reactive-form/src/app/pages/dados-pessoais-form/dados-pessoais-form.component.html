@@ -35,6 +35,7 @@
               </div>
             }
           </div>
+
           <div class="cadastro-form__field cadastro-form__field--half">
             <label for="cidade" class="cadastro-form__label">Cidade</label>
             <input id="cidade" formControlName="cidade" type="text" class="cadastro-form__input">
@@ -49,19 +50,33 @@
         <div class="cadastro-form__field">
           <label for="email" class="cadastro-form__label">Email</label>
           <input class="cadastro-form__input" type="text" id="email" formControlName="email">
-          @if (dadosPessoaisForm.get('email')?.invalid && dadosPessoaisForm.get('email')?.touched) {
-            <div class="cadastro-form__error">
-              Email é Obrigatório
-            </div>
-          }
+
+
+          <div class="cadastro-form__error">
+            @if (dadosPessoaisForm.get('email')?.invalid && dadosPessoaisForm.get('email')?.touched) {
+              <span>Email é Obrigatório</span>
+            } @else if (dadosPessoaisForm.get('email')?.touched && dadosPessoaisForm.get('email')?.errors?.['email']) {
+              <span>Email Inválido</span>
+            }
+          </div>
         </div>
 
-        <div class="cadastro-form__field cadastro-form__field--half">
-          <div class="cadastro-form__field">
+        <div class="cadastro-form__row">
+          <div class="cadastro-form__field cadastro-form__field--half">
             <label for="senha" class="cadastro-form__label">Senha</label>
             <input type="password" formControlName="senha" id="senha" class="cadastro-form__input">
+            @if ((dadosPessoaisForm.get('senha')?.touched && dadosPessoaisForm.get('senha')?.invalid) || dadosPessoaisForm.get('senha')?.errors?.['minLenght']) {
+              <label class="cadastro-form__error">Mínimo 6 Caracteres</label>
+            }
           </div>
 
+          <div class="cadastro-form__field cadastro-form__field--half">
+            <label for="repitaSenha" class="cadastro-form__label">Confirma a Senha</label>
+            <input id="repitaSenha" type="password" formControlName="confirmaSenha" class="cadastro-form__input">
+            @if (dadosPessoaisForm.get('senha')?.value != dadosPessoaisForm.get('confirmaSenha')?.value) {
+              <label class="cadastro-form__error">As senhas não são iguais</label>
+            }
+          </div>
         </div>
 
 
