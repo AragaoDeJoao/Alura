@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, retry} from 'rxjs';
-import {Cidade, Estado} from '../models/ibge.interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Estado, Cidade } from '../models/ibge.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IbgeService {
-  private readonly API_URL = 'https://servicosdados.ibge.gov.br/api/v1/localidades';
+  private API_ESTADOS = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
 
+  getEstados(): Observable<Estado[]> {
+    // Adicione um console.log aqui para debug
+    console.log('Chamando getEstados');
+    return this.http.get<Estado[]>(this.API_ESTADOS);
   }
 
-  getEstados() : Observable<Estado[]>{
-    return this.http.get<Estado[]>(`${this.API_URL}/estados?orderBy=nome`).pipe(retry(2));
+  getCidadesPorEstado(uf: string): Observable<Cidade[]> {
+    console.log(`Buscando cidades para o estado: ${uf}`);
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`;
+    return this.http.get<Cidade[]>(url);
   }
-
-  getCidadesPorEstado(uf: string) : Observable<Cidade[]>{
-    return this.http.get<Cidade[]>(`${this.API_URL}/estados/${uf}/municipios?orderBy=nome`).pipe(retry(2));
-  }
-
-
 }

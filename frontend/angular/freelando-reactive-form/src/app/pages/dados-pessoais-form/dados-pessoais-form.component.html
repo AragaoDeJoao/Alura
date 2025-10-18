@@ -23,10 +23,14 @@
         <div class="cadastro-form__row">
           <div class="cadastro-form__field cadastro-form__field--half">
             <label for="estado" class="cadastro-form__label">Estado</label>
+            <!-- No select de estado -->
             <select id="estado" formControlName="estado" class="cadastro-form__select">
               <option value="" disabled selected>Selecione</option>
-              @for (estado of estados; track estado) {
-                <option [value]="estado.sigla">{{ estado.nome }}</option>
+              @let estados = estado$ | async;
+              @if (estados) {
+                @for (estado of estados; track estado.sigla) {
+                  <option [value]="estado.sigla">{{ estado.nome }}</option>
+                }
               }
             </select>
             @if (dadosPessoaisForm.get('estado')?.invalid && dadosPessoaisForm.get('estado')?.touched) {

@@ -11,7 +11,7 @@ import {
 import {ButtonComponent} from '../../shared/components/button/button.component';
 import {Router} from '@angular/router';
 import {CadastroService} from '../../shared/services/cadastro.service';
-import {BehaviorSubject, Observable, of, startWith, switchMap, tap} from 'rxjs';
+import {async, BehaviorSubject, Observable, of, startWith, switchMap, tap} from 'rxjs';
 import {Cidade, Estado} from '../../shared/models/ibge.interface';
 import {IbgeService} from '../../shared/services/ibge.service';
 
@@ -30,18 +30,15 @@ import {IbgeService} from '../../shared/services/ibge.service';
 
 export class DadosPessoaisFormComponent implements OnInit {
 
-  dadosPessoaisForm!: FormGroup;
-
-
-  estados$!: Observable<Estado[]>;
-  cidade$!: Observable<Cidade[]>;
-
-  carregandoCidades$ = new BehaviorSubject<boolean>(false)
-
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private cadastroService = inject(CadastroService);
   private ibgeService = inject(IbgeService);
+  dadosPessoaisForm!: FormGroup;
+  estado$!: Observable<Estado[]>;
+  cidade$!: Observable<Cidade[]>;
+
+  carregandoCidades$ = new BehaviorSubject<boolean>(false)
 
   ngOnInit() {
     this.dadosPessoaisForm = this.fb.group({
@@ -54,6 +51,8 @@ export class DadosPessoaisFormComponent implements OnInit {
     })
     this.carregarEstados();
     this.configurarListenerEstado();
+
+
   }
 
   onAnterior(): void {
@@ -81,8 +80,14 @@ export class DadosPessoaisFormComponent implements OnInit {
     })
   }
 
-  private carregarEstados() {
-    this.estados$ = this.ibgeService.getEstados();
+  private carregarEstados(): void {
+    console.log('Iniciando carregamento de estados');
+    this.estado$ = this.ibgeService.getEstados().pipe(
+      tap(estados => {
+        console.log('Estados carregados:', estados);
+        console.log('Total de estados:', estados.length);
+      })
+    );
   }
 
   private configurarListenerEstado() {
@@ -97,6 +102,7 @@ export class DadosPessoaisFormComponent implements OnInit {
             return this.ibgeService.getCidadesPorEstado(uf).pipe(
               tap(() => this.carregandoCidades$.next(false)));
           }
+          this.carregandoCidades$.next(false)
           return of([]);
         })
       )
@@ -107,5 +113,6 @@ export class DadosPessoaisFormComponent implements OnInit {
     this.dadosPessoaisForm.get('cidade')?.setValue('');
   }
 
+  protected readonly async = async;
 }
 
